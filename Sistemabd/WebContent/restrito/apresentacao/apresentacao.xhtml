@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:composition template="/layout_teste.xhtml">
+		<ui:define name="centro">
+			
+				<h:form id="form"> 
+				<div class="ui-fluid">
+					<p:panelGrid 
+						columns="3" 
+						layout="grid" 
+						styleClass="ui-panelgrid-blank"
+						columnClasses="ui-grid-col-2,ui-grid-col-2,ui-grid-col-8">
+					
+						<h:panelGroup>
+							<h:outputText value="Código:" style="color:#000000"/>
+							<p:inputText/>
+						</h:panelGroup>
+						<h:panelGroup>
+							<h:outputText value="Lote:" style="color:#000000"/>
+							<p:inputText/>
+						</h:panelGroup>
+						
+						<h:panelGroup>
+							<h:outputText value="Material:" style="color:#000000"/>
+							<p:inputText/>
+						</h:panelGroup>
+					</p:panelGrid>
+					
+					<p:panelGrid 
+						columns="6" 
+						layout="grid" 
+						styleClass="ui-panelgrid-blank"
+						columnClasses="ui-grid-col-2,ui-grid-col-2,ui-grid-col-2,ui-grid-col-2,ui-grid-col-2,ui-grid-col-2">
+						<h:panelGroup>
+							<h:outputText value="Quantidade:" style="color:#000000"/>
+							<p:inputText/>
+						</h:panelGroup>
+						
+						<h:panelGroup>
+							<h:outputText value="Unidade:" style="color:#000000"/>
+							<p:selectOneMenu/>
+						</h:panelGroup>
+						
+						<h:panelGroup>
+							<h:outputText value="Concentração %:" style="color:#000000"/>
+							<p:inputText/>
+						</h:panelGroup>
+						
+						<h:panelGroup>
+							<h:outputText value="Rua:" style="color:#000000"/>
+							<p:selectOneMenu/>
+						</h:panelGroup>
+						
+						<h:panelGroup>
+							<h:outputText value="Coluna:" style="color:#000000"/>
+							<p:selectOneMenu/>
+						</h:panelGroup>
+						
+						<h:panelGroup>
+							<h:outputText value="Lado:" style="color:#000000"/>
+							<p:selectOneMenu/>
+						</h:panelGroup>
+					</p:panelGrid>
+					
+					<p:separator style="margin:16px"/>
+					
+					<p:dataTable
+						 style="margin:16px">
+						<p:column
+							headerText="Excluir">
+							<h:outputText/>
+						</p:column>
+						<p:column
+							headerText="Visualizar">
+							<h:outputText/>
+						</p:column>
+						<p:column
+							headerText="Data">
+							<h:outputText/>
+						</p:column>
+						<p:column
+							headerText="Composição">
+							<h:outputText/>
+						</p:column>
+						<p:column
+							headerText="Teste">
+							<h:outputText/>
+						</p:column>
+					</p:dataTable>
+					
+					<p:separator style="margin:16px"/>
+					
+					<h:panelGroup
+						layout="block"
+						style="text-align:center">
+						<h:outputText value="" style="display:block;height:16px"/>
+						<p:commandButton
+							value="Salvar"
+							style="width:120px"
+							icon="ui-icon-disk"
+							iconPos="rtl"
+							onclick="parent.dlg.show()"
+							update=":formTeste"
+							oncomplete="dlg_cadastrar.show();parent.dlg.hide()"/>
+					</h:panelGroup>
+					
+					<p:separator style="margin:16px"/>
+					
+					<p:toolbar>
+						<f:facet name="right">
+							<p:commandButton
+								value="Cadastrar teste"
+								resetValues="true"
+								style="width:200px"
+								icon="ui-icon-disk"
+								iconPos="rtl"
+								onclick="PF('dlg_cadastrar').show();"
+								update=":formTeste"/>
+						</f:facet>
+					</p:toolbar>
+					</div>
+				</h:form>
+			
+			<p:dialog
+				header="Cadastrar Teste"
+				modal="true"
+				widgetVar="dlg_cadastrar"
+				position="top"
+				width="800px"
+				height="300px"
+				responsive="true">
+			
+				<ui:include src="teste.xhtml"/>
+			</p:dialog>
+			
+		</ui:define>
+	</ui:composition>
+</html>

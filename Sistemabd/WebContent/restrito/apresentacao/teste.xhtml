@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:composition >
+			<div class="ui-fluid">
+			<h:form id="formTeste"> 
+				
+					<p:panelGrid 
+						columns="3" 
+						layout="grid" 
+						styleClass="ui-panelgrid-blank"
+						columnClasses="ui-grid-col-2,ui-grid-col-8,ui-grid-col-2">
+					
+						<h:panelGroup>
+							<h:outputText value="" style="color:#000000"/>
+							<p:calendar/>
+						</h:panelGroup>
+						<h:panelGroup>
+							<h:outputText value="Composição:" style="color:#000000"/>
+							<p:inputText/>
+						</h:panelGroup>
+						
+						<h:panelGroup>
+							<h:outputText value="" style="color:#000000"/>
+							<p:selectOneMenu/>
+						</h:panelGroup>
+					</p:panelGrid>
+					
+					<p:separator/>
+					
+					<p:dataTable>
+						<p:column
+							headerText="Excluir">
+							<h:outputText/>
+						</p:column>
+						<p:column
+							headerText="Visualizar">
+							<h:outputText/>
+						</p:column>
+						<p:column
+							headerText="Data">
+							<h:outputText/>
+						</p:column>
+						<p:column
+							headerText="Composição">
+							<h:outputText/>
+						</p:column>
+						<p:column
+							headerText="Teste">
+							<h:outputText/>
+						</p:column>
+					</p:dataTable>
+					
+					<p:separator/>
+					
+					<h:panelGroup
+						layout="block"
+						style="text-align:center">
+						<h:outputText value="" style="display:block;height:16px"/>
+						<p:commandButton
+							value="Salvar"
+							style="width:120px"
+							icon="ui-icon-disk"
+							iconPos="rtl"
+							onclick="parent.dlg.show()"
+							oncomplete="parent.dlg.hide(); parent.window.scrollTo(0,0)"/>
+					</h:panelGroup>
+				
+			</h:form>
+			</div>
+	</ui:composition>
+</html>

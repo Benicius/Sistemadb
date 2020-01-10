@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:composition template="/layout.xhtml">
+		<ui:define name="centro">
+			
+			<h:form id="form"> 
+				<p:messages id="messages" showDetail="true" closable="true"/>
+				<div class="ui-fluid">
+					<p:panelGrid
+						layout="grid"
+						styleClass="ui-panelgrid-blank"
+						columns="2"
+						columnClasses="ui-grid-col-3,ui-grid-col-9">
+					
+						<h:panelGroup>
+							<h:outputText value="Código:" style="font-weight: bold"/>
+							<p:inputText/>
+						</h:panelGroup>
+						
+						<h:panelGroup>
+							<h:outputText value="Descrição:" style="font-weight: bold"/>
+							<p:inputText/>
+						</h:panelGroup>
+					</p:panelGrid>
+					
+					<p:separator style="margin:16px"/>
+					
+					<h:panelGroup layout="block" style="text-align:center">
+						<h:panelGroup>
+							<h:outputText value="" style="display:block;height:16px"/>
+							<p:commandButton
+								value="Buscar"
+								update="@form"
+								icon="ui-icon-search"
+								iconPos="rtl"
+								style="width:180px"
+								onclick="parent.dlg.show()"
+								oncomplete="parent.dlg.hide()"/>
+						</h:panelGroup>
+					</h:panelGroup>
+					
+					<p:separator style="margin:16px"/>
+					
+					<p:dataTable
+						id="produto"
+						emptyMessage="Nenhum produto cadastrado"
+						paginator="true"
+						rows="10"
+						var="p"
+						scrollable="true">
+						<p:column
+							headerText="Excluir" 
+							style="width:80px;text-align:center">
+							<p:commandLink
+								process="@this"
+								onclick="PF('dlg_excluir').show()">
+								
+								<h:graphicImage library="imagem" name="delete2.png" width="15"/>
+							</p:commandLink>
+						</p:column>
+						
+						<p:column
+							headerText="Alterar"
+							style="width:80px;text-align:center">
+						
+							<p:commandLink
+								process="@this"
+								oncomplete="PF('dlgCadastrar').show()"
+								update=":formCadastrar"
+								resetValues="true">
+								
+								<h:graphicImage library="imagem" name="editar2.png" width="15"/>
+							</p:commandLink>
+						</p:column>
+						
+						<p:column
+							headerText="Visualizar"
+							style="width:80px;text-align:center">
+							<p:commandLink
+								process="@this"
+								resetValues="true"
+								oncomplete="PF('dlgCadastrar').show()"
+								update=":formCadastrar">
+								<h:graphicImage library="imagem" name="visualizar2.png" width="15"/>
+							</p:commandLink>
+						</p:column>
+						
+						<p:column
+							headerText="Cliente"
+							style="width:600px;text-align:center">
+							<h:outputText />
+						</p:column>
+						<p:column
+							headerText="RG"
+							
+							style="width:150px;text-align:center">
+							<h:outputText />
+						</p:column>
+						<p:column
+							headerText="Telefone"
+							style="width:150px;text-align:center">
+							<h:outputText />
+						</p:column>
+						<p:column
+							headerText="E-mail"
+							style="width:300px;text-align:center">
+							<h:outputText />
+						</p:column>
+					</p:dataTable>
+					
+					<p:separator style="margin:16px"/>
+					
+					<p:toolbar>
+						<f:facet name="right">
+							<p:commandButton
+								value="Cadastrar Produto"
+								resetValues="true"
+								style="width:200px"
+								icon="ui-icon-disk"
+								iconPos="rtl"
+								onclick="PF('dlgCadastrar').show();"
+								update=":formCadastrar"
+								actionListener="#{cadastrarProdutoManager.novo}"/>
+						</f:facet>
+					</p:toolbar>
+					
+					<p:separator style="margin:16px"/>
+				</div>
+			</h:form>
+			
+			<p:dialog
+				header="Cadastrar Produto"
+				modal="true"
+				widgetVar="dlgCadastrar"
+				position="top"
+				width="800px"
+				height="100%"
+				responsive="true">
+			
+				<ui:include src="produto.xhtml"/>
+			</p:dialog>
+			
+			<p:dialog
+				header="Excluir Produto"
+				widgetVar="dlg_excluir"
+				position="top"
+				modal="true"
+				width="350">
+				<h:form>
+					<h:outputText value="Tem certeza que deseja excluir o Produto?"/>
+					
+					<p:separator style="margin:16px"/>
+					
+					<h:panelGroup layout="block" style="text-align:center">
+						<p:commandButton
+							value="Não"
+							icon="ui-icon-close"
+							iconPos="rtl"
+							onclick="PF('dlg_excluir').hide()"/>
+						
+						<p:commandButton
+							value="sim"
+							icon="ui-icon-check"
+							iconPos="rtl"
+							onclick="parent.dlg.show()"
+							oncomplete="parent.dlg.hide();PF('dlg_excluirr').hide()"
+							update=":form"/>
+					</h:panelGroup>
+				</h:form>
+			</p:dialog>
+		</ui:define>
+	</ui:composition>
+</html>

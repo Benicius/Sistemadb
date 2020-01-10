@@ -1,0 +1,297 @@
+*, *:before, *:after {
+	box-sizing: border-box;
+
+}
+
+html, body {
+	width: 100%;
+	margin:0;
+	height: 100%;
+	font-size: 12px;
+	color:#474343;
+}
+
+body {
+	background-image: url(../resources/imagem/backgroundvet.jpg);
+	background-size: 10%;
+	background-repeat: repeat;
+}
+
+.container {
+	position: relative;
+	width: 100%;
+}
+
+.header {
+	position: relative;
+	width: 100%;
+}
+
+.faixa-superior {
+	position: relative;
+	width: 100%;
+	height: 30px;
+	background-color: #87b6d9;
+}
+.faixa-inferior {
+	position: relative;
+	width: 100%;
+	height: 20px;
+	background-color: #70a8d2;
+}
+
+.faixa-menu {
+	position: relative;
+	width: 100%;
+	height: 50px;
+	background-color: #383535;
+}
+
+.titulo {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 1;
+	font-size: 30px;
+	font-weight: bold;
+	color: #FFF;
+	text-shadow: 2px 1px 0px #000;
+	margin-left: 10px;
+	font-family: 'Baloo Tammudu', cursive;
+
+}
+.logotipo {
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 100px;
+	padding:5px;
+}
+
+.botao-menu {
+	display: inline-block;
+	float:left;
+	width: 30px;
+	margin: 10px;
+	cursor: pointer;
+}
+
+.texto-menu {
+	display: inline-block;
+	float: left;
+	color: #FFF;
+	line-height: 57px;
+	cursor: pointer;
+	font-size: 20px;
+	font-family: 'Baloo Tammudu', cursive;
+}
+
+.footer {
+	position: fixed;
+	width: 100%;
+	height: 30px;
+	background-color: #383535;
+	bottom:0;
+	left:0;
+}
+
+.menu-lateral {
+	position: fixed;
+	width: 250px;
+	height: calc( 100% - 120px );
+	top: 120px;
+	left: calc(-250px + 50px);
+	z-index:1000;
+	transition: all .5s;
+	padding: 10px;
+	overflow: auto;
+	background-color: #383535;
+	opacity: .8;
+}
+
+.show-menu {
+	left:0;
+}
+
+.block {
+	position: fixed;
+	width: 100%;
+	height: calc( 100% - 100px);
+	top: 100px;
+	display:none;
+	z-index: 100;
+	background-color: #CECECE;
+	opacity: 0.0;
+	transition: all .5s;
+}
+
+.show-block {
+	display: block;
+	opacity: 0.8;
+}
+
+.item-menu {
+	position:relative;
+	height: 40px;
+	cursor: pointer;
+	display:block;
+	text-align:left;
+	border-bottom: 1px solid #CECECE;
+	font-family: 'Baloo Tammudu', cursive;
+}
+
+.item-menu-expandir {
+	position: absolute;
+	right: 0;
+	top: 5px;
+	width: 15px !important;
+	height: 15px !important;
+}
+
+.item-submenu {
+	display:none;
+}
+
+.item-menu:hover {
+	background-color: #515151
+}
+
+.item-menu img {
+	height: 25px;
+	margin: 7px;
+	display: inline-block;
+	float: right;
+	width: 25px;
+}
+
+.item-menu span {
+	display: inline-block;
+	line-height: 50px;
+	font-size: 18px;
+	color: #FFF;
+	margin-left:30px;
+}
+
+.conteudo {
+	position: relative;
+	
+}
+.window {
+	position: relative;
+	width: 80%;
+	margin: 0 auto;
+	min-height: 200px;
+	background-color: #FFF;
+	margin-top:20px;
+	border-radius: 5px;
+	border: 2px solid #87b6d9;
+	box-shadow: 5px 5px 5px #CECECE;
+}
+.grid {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	width: calc(100% - 50px);
+	margin-left: 50px;
+	margin-top:20px;
+}
+
+.panel {
+	background-color: #FFF;
+	height: 200px;
+	position: relative;
+	margin: 10px;
+	border-radius: 5px;
+}
+
+.panel-circle {
+	display: block;
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	background-color: #87b6d9;
+	border-radius: 50%;
+	left: calc( 50% - 25px);
+	top: -20px;
+	z-index: -1;
+
+}
+.panel-header {
+	display: block;
+	height: 30px;
+	background-color: #87b6d9;
+	font-size: 16px;
+	text-align: center;
+	line-height: 30px;
+	font-weight: bold;
+	border-radius: 5px 5px 0 0;
+}
+
+.table {
+	position: relative;
+	width: 100%;
+}
+
+.table-row {
+	position: relative;
+	width:100%
+}
+
+.color-row {
+	background-color: #CFFFC1;
+}
+
+.table-column {
+	position: relative;
+	float: left;
+	height: 18px;
+	line-height: 18px;
+	padding-left: 2px;
+	border-bottom: 1px solid #CECECE;
+	border-right: 1px solid #CECECE;
+	text-align:center;
+}
+
+.table-column-header {
+	position: relative;
+	float: left;
+	font-size: 11px;
+	font-weight: bold;
+	text-align: center;
+	background-color: #383535;
+	height: 20px;
+	line-height: 20px;
+	border: 1px solid #535252;
+	color: #FFF;
+}
+
+.column-size-1 {
+	width: 8.333333333%;
+}
+
+.column-size-2 {
+	width: 16.666666667%;
+}
+
+.column-size-3 {
+	width: 25%;
+}
+
+.column-size-4 {
+	width: 33.333333333%;
+}
+
+.column-size-8 {
+	width: 66.666666667%;
+}
+
+.opcao-column {
+	width:80px;
+	text-align: center;
+}
+
+.column-150 {
+	width:150px;
+	text-align:center;
+}

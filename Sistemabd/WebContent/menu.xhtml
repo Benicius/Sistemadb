@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+	<ui:composition>
+	<div class="menu-lateral">
+		<a href="index.jsf" class="item-menu">
+					<span>Inicio</span>
+					<h:graphicImage library="imagem" name="home.png"/>
+				</a>
+				<a href="../cadastro/pesquisar_emissor.jsf" class="item-menu">
+					<span>Emissor</span>
+					<h:graphicImage library="imagem" name="emissor.png"/>
+				</a>
+				<a href="../cadastro/pesquisar_cliente.jsf" class="item-menu">
+					<span>Cliente</span>
+					<h:graphicImage library="imagem" name="cliente.png"/>
+				</a>
+				<a href="../produto/pesquisar_produto.jsf" class="item-menu">
+					<span>Produto</span>
+					<h:graphicImage library="imagem" name="cliente.png"/>
+				</a>
+			</div>
+			<div>
+			<p:dialog widgetVar="load" closable="false" resizable="false" showHeader="false" modal="true">
+				<h:graphicImage library="imagem" name="carregando.gif" width="100"/>
+			</p:dialog>
+	</div>
+   </ui:composition>
+</html>

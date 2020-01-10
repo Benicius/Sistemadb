@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:composition template="/layout.xhtml">
+		<ui:define name="centro">
+			
+			<h:form id="form"> 
+				<p:messages id="messages" showDetail="true" closable="true"/>
+				<div class="ui-fluid">
+					<p:panelGrid
+						layout="grid"
+						styleClass="ui-panelgrid-blank"
+						columns="4">
+					
+						<h:panelGroup>
+							<h:outputText value="Razão Social:" style="font-weight: bold"/>
+							<p:inputText value="#{pesquisarEmissorManager.model.nome}"/>
+						</h:panelGroup>
+						
+						<h:panelGroup>
+							<h:outputText value="Nome Fantasia:" style="font-weight: bold"/>
+							<p:inputText value="#{pesquisarEmissorManager.model.nomeFantasia}"/>
+						</h:panelGroup>
+						
+						<h:panelGroup>
+							<h:outputText value="CNPJ:" style="font-weight: bold"/>
+							<p:inputMask value="#{pesquisarEmissorManager.model.cnpj}"/>
+						</h:panelGroup>
+						
+						<h:panelGroup>
+							<h:outputText value="" style="display:block;height:16px"/>
+							<p:commandButton
+								value="Buscar"
+								update="@form"
+								icon="ui-icon-search"
+								iconPos="rtl"
+								onclick="parent.dlg.show()"
+								oncomplete="parent.dlg.hide()"/>
+						</h:panelGroup>
+					</p:panelGrid>
+					
+					<p:separator style="margin:16px"/>
+					
+					<p:dataTable
+						lazy="true"
+						id="emissor"
+						emptyMessage="Nenhum emissor cadastrado"
+						paginator="true"
+						rows="10"
+						var="e"
+						value="#{pesquisarEmissorManager.model}">
+						<p:column
+							headerText="Excluir" 
+							style="width:80px;text-align:center">
+							<p:commandLink
+								process="@this"
+								onclick="PF('dlg_excluir').show()">
+								
+								<f:setPropertyActionListener value="#{e}" target="#{pesquisarEmissorManager.emissor}"/>
+								<h:graphicImage library="imagem" name="delete2.png" width="15"/>
+							</p:commandLink>
+						</p:column>
+						
+						<p:column
+							headerText="Alterar"
+							style="width:80px;text-align:center">
+						
+							<p:commandLink
+								process="@this"
+								oncomplete="PF('dlg_cadastrar').show()"
+								update=":formCadastrar"
+								resetValues="true"
+								actionListener="#{cadastrarEmissorManager.carregar(e.chave)}">
+								
+								<f:setPropertyActionListener value="#{false}" target="#{cadastrarEmissorManager.visualizar}"/>
+								<h:graphicImage library="imagem" name="editar2.png" width="15"/>
+							</p:commandLink>
+						</p:column>
+						
+						<p:column
+							headerText="Visualizar"
+							style="width:80px;text-align:center">
+							<p:commandLink
+								actionListener="#{cadastrarEmissorManager.carregar(e.chave)}"
+								process="@this"
+								resetValues="true"
+								oncomplete="PF('dlg_cadastrar').show()"
+								update=":formCadastrar">
+								<h:graphicImage library="imagem" name="visualizar2.png" width="15"/>
+							</p:commandLink>
+						</p:column>
+						
+						<p:column
+							headerText="Emissor">
+							<h:outputText value="#{e.nome}"/>
+						</p:column>
+						<p:column
+							headerText="CNPJ">
+							<h:outputText value="#{e.cnpj}"/>
+						</p:column>
+						<p:column
+							headerText="Telefone">
+							<h:outputText value="#{e.telefone}"/>
+						</p:column>
+					</p:dataTable>
+					
+					<p:separator style="margin:16px"/>
+					
+					<p:toolbar>
+						<f:facet name="right">
+							<p:commandButton
+								value="Cadastrar Emissor"
+								resetValues="true"
+								style="width:200px"
+								icon="ui-icon-disk"
+								iconPos="rtl"
+								onclick="PF('dlg_cadastrar').show();"
+								update=":formCadastrar"
+								actionListener="#{cadastrarEmissorManager.novo}"/>
+						</f:facet>
+					</p:toolbar>
+					
+					<p:separator style="margin:16px"/>
+				</div>
+			</h:form>
+			
+			<p:dialog
+				header="Cadastrar Emissor"
+				modal="true"
+				widgetVar="dlg_cadastrar"
+				position="top"
+				width="800px"
+				height="100%"
+				responsive="true">
+			
+				<ui:include src="emissor.xhtml"/>
+			</p:dialog>
+			
+			<p:dialog
+				header="Excluir Emissor"
+				widgetVar="dlg_excluir"
+				position="top"
+				modal="true"
+				width="350">
+				<h:form>
+					<h:outputText value="Tem certeza que deseja excluir o Emissor?"/>
+					
+					<p:separator/>
+					
+					<h:panelGroup layout="block" style="text-align:center">
+						<p:commandButton
+							value="Não"
+							icon="ui-icon-close"
+							iconPos="rtl"
+							onclick="PF('dlg_excluir').hide()"/>
+						
+						<p:commandButton
+							value="sim"
+							icon="ui-icon-check"
+							iconPos="rtl"
+							onclick="parent.dlg.show()"
+							oncomplete="parent.dlg.hide();PF('dlg_excluirr').hide()"
+							update=":form"
+							actionListener="#{pesquisarEmissorManager.excluir}"/>
+					</h:panelGroup>
+				</h:form>
+			</p:dialog>
+		</ui:define>
+	</ui:composition>
+</html>

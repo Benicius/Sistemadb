@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<title>#{titulo}</title>
+		
+	<h:outputStylesheet library="css" name="estilo1.css"></h:outputStylesheet>		
+	
+	<h:outputScript library="js" name="jquery-3.2.1.min.js"/>
+	<h:outputScript library="js" name="script-app-mobile.js"/>
+	</h:head>
+	
+	<h:body>
+		<div class="topo">
+			<h:graphicImage library="imagem" name="bed.png"/>
+		</div>
+		<div class="faixa-menu">
+			<h:graphicImage library="imagem" name="menu.png" class="botao-menu menu"/>
+			<span class="texto-menu menu">MENU</span>
+		</div>
+		<div id="nav">
+			<ui:include src="/menu.xhtml" /> 
+		</div>
+		
+		<div class="conteudo">
+			<div class="pag">
+				<div class="centro">
+					<ui:insert name="centro"/> 
+				</div>
+			</div>
+		</div>
+		
+		<div class="rodape">
+			<strong>Benicius Developer</strong><br/>
+			+55 11 96483-9696
+		</div>
+		
+		<ui:debug />
+	</h:body>
+</html>

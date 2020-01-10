@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:composition >
+		<div class="ui-fluid">
+			<h:form id="formCadastrar"> 
+				<p:growl />
+				<p:messages closable="true" severity="fatal/error"/>
+				
+				<h:panelGroup
+					layout="block"
+					style="text-align:center">
+					<p:commandButton
+						value="Salvar"
+						style="width:120px"
+						icon="ui-icon-disk"
+						iconPos="rtl"
+						actionListener="#{cadastrarProdutoManager.salvar}"
+						disabled="#{cadastrarProdutoManager.visualizar}"/>
+				</h:panelGroup>
+				
+			</h:form>
+		</div>
+	</ui:composition>
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:composition >
+		<div class="ui-fluid">
+			<h:form id="formCadastrar"> 
+				<p:growl />
+				<p:messages closable="true" severity="fatal/error"/>
+				
+					<p:panelGrid
+						layout="grid"
+						styleClass="ui-panelgrid-blank"
+						columns="1">
+						<h:panelGroup>
+							<h:outputText value="Pessoa:" style="font-weight: bold"/>
+							<p:selectOneRadio
+								value="#{cadastrarClienteManager.negocio.cliente.tipo}"
+								valueChangeListener="#{cadastrarClienteManager.selecionarPessoa}"
+								required="true"
+								requiredMessage="O campo 'Pessoa' é necessário!">
+								<f:selectItem itemLabel="Física" itemValue="fisica"/>
+								<f:selectItem itemLabel="Jurídica" itemValue="juridica"/>
+								
+								<p:ajax update="formCadastrar:cpf"/>
+							</p:selectOneRadio>
+						</h:panelGroup>
+					</p:panelGrid>
+					<p:separator style="margin:16px"/>
+					
+					<p:panelGrid
+						layout="grid"
+						styleClass="ui-panelgrid-blank"
+						columns="2"
+						columnClasses="ui-grid-col-8,ui-grid-col-4">
+						<h:panelGroup>
+							<h:outputText value="Nome: " style="font-weight: bold"/>
+							<p:inputText value="#{cadastrarClienteManager.negocio.cliente.nome}"/>
+						</h:panelGroup>
+						
+						<h:panelGroup>
+							<h:outputText value="RG:" style="font-weight: bold"/>
+							<p:inputMask 
+								value="#{cadastrarClienteManager.negocio.cliente.rg}"
+								mask="99.999.999-9"/>
+						</h:panelGroup>
+					</p:panelGrid>
+					
+					<p:panelGrid 
+						columns="3" 
+						layout="grid" 
+						styleClass="ui-panelgrid-blank"
+						columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-6">
+						
+						<h:panelGroup id="cpf">
+							<h:outputText value="CPF/CNPJ: " style="font-weight: bold"/>
+							<p:inputMask 
+								mask="999.999.999-99"
+								id="cpf1"
+								value="#{cadastrarClienteManager.negocio.cliente.cpf}"
+								rendered="#{cadastrarClienteManager.fisica}"/>
+								
+							<p:inputMask 
+								mask="99.999.999/9999-99"
+								id="cpf2"
+								value="#{cadastrarClienteManager.negocio.cliente.cnpj}"
+								rendered="#{cadastrarClienteManager.juridica}"/>
+						</h:panelGroup>
+						
+						<h:panelGroup>
+							<h:outputText value="Telefone:" style="font-weight: bold"/>
+							<p:inputMask  
+								value="#{cadastrarClienteManager.negocio.cliente.telefone}"
+								mask="(99)9 9999-9999"/>
+						</h:panelGroup>
+						
+						<h:panelGroup>
+							<h:outputText value="E-mail:" style="font-weight: bold"/>
+							<p:inputMask  
+								value="#{cadastrarClienteManager.negocio.cliente.email}"/>
+						</h:panelGroup>
+					</p:panelGrid>
+					
+					<p:separator style="margin:16px"/>
+					
+					<p:tabView id="tab01">
+						<p:tab title="Endereço">
+							<p:panelGrid
+								layout="grid"
+								styleClass="ui-panelgrid-blank"
+								columns="2"
+								columnClasses="ui-grid-col-2,ui-grid-col-10">
+								<h:panelGroup>
+									<h:outputText value="Cep: " style="font-weight: bold"/>
+									<p:inputMask
+										mask="99999-999"
+										value="#{cadastrarClienteManager.negocio.cliente.endereco.cep}"/>
+								</h:panelGroup>
+								
+								<h:panelGroup>
+									<h:outputText value="Logradouro: " style="font-weight: bold"/>
+									<p:inputText
+										value="#{cadastrarClienteManager.negocio.cliente.endereco.logradouro}"/>
+								</h:panelGroup>
+							</p:panelGrid>
+							
+							<p:panelGrid
+								layout="grid"
+								styleClass="ui-panelgrid-blank"
+								columns="2"
+								columnClasses="ui-grid-col-2,ui-grid-col-10">
+								<h:panelGroup>
+									<h:outputText value="Número: " style="font-weight: bold"/>
+									<p:inputText
+										value="#{cadastrarClienteManager.negocio.cliente.endereco.numero}"/>
+								</h:panelGroup>
+								
+								<h:panelGroup>
+									<h:outputText value="Bairro: " style="font-weight: bold"/>
+									<p:inputText 
+										value="#{cadastrarClienteManager.negocio.cliente.endereco.bairro}"/>
+								</h:panelGroup>
+							</p:panelGrid>
+							
+							<p:panelGrid
+								layout="grid"
+								styleClass="ui-panelgrid-blank"
+								columns="3">
+								
+								<h:panelGroup>
+									<h:outputText value="Complemento: " style="font-weight: bold"/>
+									<p:inputText
+										value="#{cadastrarClienteManager.negocio.cliente.endereco.complemento}"/>
+								</h:panelGroup>
+								
+								<h:panelGroup>
+									<h:outputText value="Município: " style="font-weight: bold"/>
+									<p:inputText
+										value="#{cadastrarClienteManager.negocio.cliente.endereco.municipio}"/>
+								</h:panelGroup>
+								
+								<h:panelGroup>
+									<h:outputText value="UF: " style="font-weight: bold"/>
+									<p:selectOneMenu
+										style="width:100%"
+										value="#{cadastrarClienteManager.negocio.cliente.endereco.uf}">
+										<f:selectItem itemLabel="Selecione..." 				itemValue="#{null}"/>
+										<f:selectItem itemLabel="Acre" 						itemValue="ac"/>
+										<f:selectItem itemLabel="Alagoas" 					itemValue="al"/>
+										<f:selectItem itemLabel="Amapá" 					itemValue="ap"/>
+										<f:selectItem itemLabel="Amazonas" 					itemValue="am"/>
+										<f:selectItem itemLabel="Bahia" 					itemValue="ba"/>
+										<f:selectItem itemLabel="Ceará" 					itemValue="ce"/>
+										<f:selectItem itemLabel="Distrito Federal" 			itemValue="df"/>
+										<f:selectItem itemLabel="Espírito Santo" 			itemValue="es"/>
+										<f:selectItem itemLabel="Goiás" 					itemValue="go"/>
+										<f:selectItem itemLabel="Maranhão" 					itemValue="ma"/>
+										<f:selectItem itemLabel="Mato Grosso" 				itemValue="mt"/>
+										<f:selectItem itemLabel="Mato Grosso do Sul" 		itemValue="ms"/>
+										<f:selectItem itemLabel="Minas Gerais" 				itemValue="mg"/>
+										<f:selectItem itemLabel="Pará" 						itemValue="pa"/>
+										<f:selectItem itemLabel="Paraíba" 					itemValue="pb"/>
+										<f:selectItem itemLabel="Paraná" 					itemValue="pr"/>
+										<f:selectItem itemLabel="Pernambuco" 				itemValue="pe"/>
+										<f:selectItem itemLabel="Piauí" 					itemValue="pi"/>
+										<f:selectItem itemLabel="Rio de Janeiro" 			itemValue="rj"/>
+										<f:selectItem itemLabel="Rio Grande do Norte" 		itemValue="rn"/>
+										<f:selectItem itemLabel="Rio Grande do Sul" 		itemValue="rs"/>
+										<f:selectItem itemLabel="Rondia" 					itemValue="ro"/>
+										<f:selectItem itemLabel="Roraima" 					itemValue="rr"/>
+										<f:selectItem itemLabel="Santa Catarina" 			itemValue="sc"/>
+										<f:selectItem itemLabel="São Paulo" 				itemValue="sp"/>
+										<f:selectItem itemLabel="Sergipe" 					itemValue="se"/>
+										<f:selectItem itemLabel="Tocantins" 				itemValue="to"/>
+									</p:selectOneMenu>
+								</h:panelGroup>
+							</p:panelGrid>
+						</p:tab>
+						
+						<p:tab 
+							title="Veículo">
+							<h:panelGroup 
+								id="tabVeiculo">
+								<ui:repeat 
+									var="v" value="#{cadastrarClienteManager.negocio.cliente.veiculos}"
+									varStatus="status">
+								<p:panelGrid
+									layout="grid"
+									styleClass="ui-panelgrid-blank"
+									columns="5"
+									columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-2,ui-grid-col-1">
+									
+									<h:panelGroup>
+										<h:outputText value="Marca:"/>
+										<p:inputText 
+											id="marca"
+											value="#{v.marca}"/>
+									</h:panelGroup>
+									
+									<h:panelGroup>
+										<h:outputText value="Modelo:"/>
+										<p:inputText  
+											id="modelo"
+											value="#{v.modelo}"/>
+									</h:panelGroup>
+									
+									<h:panelGroup>
+										<h:outputText value="Placa:"/>
+										<p:inputText 
+											id="placa"
+											value="#{v.placa}"/>
+									</h:panelGroup>
+									
+									<h:panelGroup>
+										<h:outputText value="Ano:"/>
+										<p:inputText 
+											id="ano"
+											value="#{v.ano}"/>
+									</h:panelGroup>
+									
+									<h:panelGroup>
+										<h:outputText value="" style="display:block;height:16px"/>
+										<p:commandButton
+											id="btnmais"
+											icon="ui-icon-plus"
+											update=":formCadastrar:tab01:tabVeiculo"
+											process=":formCadastrar:tab01:tabVeiculo"
+											actionListener="#{cadastrarClienteManager.negocio.adicionarVeiculo}"
+											disabled="#{cadastrarClienteManager.visualizar}"/>
+									</h:panelGroup>
+									
+									<h:panelGroup>
+										<h:outputText value="Motor:"/>
+										<p:inputText 
+											id="motor"
+											value="#{v.motor}"/>
+									</h:panelGroup>
+									
+									<h:panelGroup>
+										<h:outputText value="Kilometragem:"/>
+										<p:inputNumber
+											id="km"
+											thousandSeparator="."
+											value="#{v.kilometro}"/>
+									</h:panelGroup>
+									
+									<h:panelGroup>
+										<h:outputText value="Cor:"/>
+										<p:inputText 
+											id="cor"
+											value="#{v.cor}"/>
+									</h:panelGroup>
+									
+									<h:outputText value=""/>
+									
+									<h:panelGroup rendered="#{cadastrarClienteManager.negocio.quantidadeVeiculo > 1}">
+										<h:outputText value="" style="display:block;height:16px"/>
+										<p:commandButton
+											icon="ui-icon-close"
+											update=":formCadastrar:tab01:tabVeiculo"
+											process=":formCadastrar:tab01:tabVeiculo"
+											actionListener="#{cadastrarClienteManager.negocio.excluirVeiculo(status.index)}"
+											disabled="#{cadastrarClienteManager.visualizar}"/>
+									</h:panelGroup>
+									
+								</p:panelGrid>
+								
+								<p:separator style="margin:16px"/>
+								
+								</ui:repeat>
+							</h:panelGroup>
+						</p:tab>
+					</p:tabView>
+					
+					<p:separator style="margin:16px"/>
+					
+					<h:panelGroup
+						layout="block"
+						style="text-align:center">
+						<h:outputText value="" style="display:block;height:16px"/>
+						<p:commandButton
+							value="Salvar"
+							style="width:120px"
+							icon="ui-icon-disk"
+							iconPos="rtl"
+							actionListener="#{cadastrarClienteManager.salvar}"
+							disabled="#{cadastrarClienteManager.visualizar}"/>
+					</h:panelGroup>
+				
+			</h:form>
+		</div>
+	</ui:composition>
+</html>
